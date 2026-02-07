@@ -73,9 +73,13 @@ Database: `ecommerce_lakehouse`
 ## Screenshots
 
 1. **List of tables in ecommerce_lakehouse**
+<img width="1429" height="421" alt="image" src="https://github.com/user-attachments/assets/d5d34103-e4cb-4824-83d8-ed9e29b9d3b5" />
 
 2. **raw_orders schema and location**
+<img width="922" height="570" alt="image" src="https://github.com/user-attachments/assets/497fc4fd-9416-436e-9cb3-654b189c25d8" />
 
 3. **curated_orders schema + partition key**
+<img width="1215" height="635" alt="image" src="https://github.com/user-attachments/assets/15b17258-ee61-438f-a399-96e65b76eeac" />
 
 4. **quarantine_orders schema**
+<img width="1210" height="650" alt="image" src="https://github.com/user-attachments/assets/b67e7c51-3fa0-435b-9a3d-63466e6b0160" />
