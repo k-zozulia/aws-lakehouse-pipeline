@@ -9,6 +9,7 @@
 - **Dedup key**: `order_id`
 
 ## Execution Results (from final run)
+<img width="948" height="309" alt="image" src="https://github.com/user-attachments/assets/aa3b40ae-9c2d-4a52-9e95-901853186f5e" />
 
 ## How to Run the Job
 1. Go to AWS Glue Console → ETL jobs
@@ -22,26 +23,21 @@
 
 ## Mandatory CloudWatch Steps
 - Log groups: `/aws-glue/jobs/output` and `/aws-glue/jobs/error`
-- Retention policy: Set to **7 days** (to minimize storage costs)
+- Retention policy: Set to **5 days**
 - Logs contain: input/curated/quarantine counts, rejection reasons grouping, start/end timestamps
 
-## Screenshots (add to docs/images/ or root images/)
+## Screenshots
 
-1. Job configuration (resources, IAM role, script location)  
-   ![Job configuration](images/glue-job-config.png)
+1. Successful job run details
+   <img width="1072" height="321" alt="image" src="https://github.com/user-attachments/assets/d23e53f7-c4fc-48fa-bb0f-f767b3a4ea44" />
 
-2. Successful job run details (status SUCCEEDED)  
-   ![Job run success](images/glue-run-success.png)
+2. Log retention policy set to 5 days  
+   <img width="725" height="259" alt="image" src="https://github.com/user-attachments/assets/cc24e910-9c6b-420d-b112-c8140b2de69b" />
 
-3. CloudWatch logs snippet (with all required counts, reasons, timestamps)  
-   ![CloudWatch logs](images/glue-cloudwatch-logs.png)
+3. S3 curated folder with partitions
+   <img width="1427" height="667" alt="image" src="https://github.com/user-attachments/assets/53ed18d9-355a-4c55-88b5-9b327e8a6820" />
 
-4. Log retention policy set to 7 days  
-   ![Log retention](images/glue-log-retention.png)
+4. S3 quarantine folder with files  
+   <img width="1424" height="643" alt="image" src="https://github.com/user-attachments/assets/b6e18a4a-2e91-4959-be06-80237b655fac" />
 
-5. S3 curated folder with partitions (order_date=...)  
-   ![S3 curated partitions](images/s3-curated-partitions.png)
-
-6. S3 quarantine folder with files  
-   ![S3 quarantine](images/s3-quarantine.png)
 
