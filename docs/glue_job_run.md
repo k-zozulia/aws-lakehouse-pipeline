@@ -3,13 +3,13 @@
 ## Job Overview
 - **Job name**: orders-raw-to-curated
 - **IAM Role**: GlueServiceRole-karina
-- **Resources**: G.1X worker type, 10 workers
+- **Resources**: G.1X worker type, 2 workers
 - **Runs executed**: 3 (1 test + 1 final)
 - **Last run status**: SUCCEEDED
 - **Dedup key**: `order_id`
 
 ## Execution Results (from final run)
-<img width="948" height="309" alt="image" src="https://github.com/user-attachments/assets/aa3b40ae-9c2d-4a52-9e95-901853186f5e" />
+<img width="942" height="341" alt="image" src="https://github.com/user-attachments/assets/db039d97-cd4f-4267-914a-9495fd21cb8c" />
 
 ## How to Run the Job
 1. Go to AWS Glue Console → ETL jobs
@@ -29,15 +29,19 @@
 ## Screenshots
 
 1. Successful job run details
-   <img width="1072" height="321" alt="image" src="https://github.com/user-attachments/assets/d23e53f7-c4fc-48fa-bb0f-f767b3a4ea44" />
+   <img width="1079" height="258" alt="image" src="https://github.com/user-attachments/assets/0a9a5322-5975-450c-94d3-ef1cd607986c" />
 
 2. Log retention policy set to 5 days  
-   <img width="725" height="259" alt="image" src="https://github.com/user-attachments/assets/cc24e910-9c6b-420d-b112-c8140b2de69b" />
+   <img width="1163" height="425" alt="image" src="https://github.com/user-attachments/assets/9347dd46-4846-45e2-b805-4c7def0ecefc" />
 
 3. S3 curated folder with partitions
    <img width="1427" height="667" alt="image" src="https://github.com/user-attachments/assets/53ed18d9-355a-4c55-88b5-9b327e8a6820" />
 
 4. S3 quarantine folder with files  
    <img width="1424" height="643" alt="image" src="https://github.com/user-attachments/assets/b6e18a4a-2e91-4959-be06-80237b655fac" />
+
+5. CloudWatch Alarm for job failure
+   <img width="1192" height="308" alt="image" src="https://github.com/user-attachments/assets/092fdbe0-87ff-4763-af90-38edc6182ca8" />
+
 
 
