@@ -43,5 +43,27 @@
 5. CloudWatch Alarm for job failure
    <img width="1192" height="308" alt="image" src="https://github.com/user-attachments/assets/092fdbe0-87ff-4763-af90-38edc6182ca8" />
 
+---
+
+# Glue Studio Visual ETL (Optional - Recommended)
+
+Created visual job: visual-orders-raw-to-curated
+
+## Visual Pipeline Overview
+- Source: Glue Catalog table raw_orders
+- Filters: missing order_id, invalid quantity/price
+- Transformations: normalize status, derive order_date/hour_of_day/total_amount
+- Branching: valid → curated, invalid → quarantine with rejection_reason
+- Targets: Parquet to curated/orders/ (partition by order_date), quarantine/orders/
+
+## Generated PySpark Code
+
+## Comparison with Manual PySpark Code
+- Visual: simpler for basic filters/derive, auto-partitioning, less custom logic
+- Manual: more flexible (custom functions, detailed logging, unionByName handling)
+- Visual code is more declarative, uses DynamicFrame API
+
+
+## Visual canvas graph
 
 
