@@ -57,6 +57,49 @@ Created visual job: visual-orders-raw-to-curated
 - Targets: Parquet to curated/orders/ (partition by order_date), quarantine/orders/
 
 ## Generated PySpark Code
+```bash
+args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+sc = SparkContext()
+glueContext = GlueContext(sc)
+spark = glueContext.spark_session
+job = Job(glueContext)
+job.init(args['JOB_NAME'], args)
+
+# Script generated for node AWS Glue Data Catalog
+AWSGlueDataCatalog_node1770649962801 = glueContext.create_dynamic_frame.from_catalog(database="ecommerce_lakehouse", table_name="raw_orders", transformation_ctx="AWSGlueDataCatalog_node1770649962801")
+
+# Script generated for node Filter invalid rows
+Filterinvalidrows_node1770651678637 = Filter.apply(frame=AWSGlueDataCatalog_node1770649962801, f=lambda row: (bool(re.match("^$", row["order_id"])) or row["quantity"] <= 0 or row["price"] < 0), transformation_ctx="Filterinvalidrows_node1770651678637")
+
+# Script generated for node Filter valid order_id
+Filtervalidorder_id_node1770650066791 = Filter.apply(frame=AWSGlueDataCatalog_node1770649962801, f=lambda row: (bool(re.match(".+", row["order_id"]))), transformation_ctx="Filtervalidorder_id_node1770650066791")
+
+# Script generated for node Add rejection_reason
+Addrejection_reason_node1770651864057 = Filterinvalidrows_node1770651678637.gs_derived(colName="rejection_reason", expr="CASE    WHEN order_id IS NULL THEN 'missing_order_id'   WHEN quantity <= 0 OR price < 0 THEN 'invalid_quantity_or_price'   ELSE 'other_invalid' END")
+
+# Script generated for node Filter valid quantity/price
+Filtervalidquantityprice_node1770650177176 = Filter.apply(frame=Filtervalidorder_id_node1770650066791, f=lambda row: (row["quantity"] > 0 and row["price"] > 0), transformation_ctx="Filtervalidquantityprice_node1770650177176")
+
+# Script generated for node Normalize status
+Normalizestatus_node1770650705719 = Filtervalidquantityprice_node1770650177176.gs_derived(colName="status", expr="CASE    WHEN lower(trim(status)) IN ('complete', 'done') THEN 'completed'   WHEN lower(trim(status)) = 'canceled' THEN 'cancelled'   ELSE lower(trim(status)) END")
+
+# Script generated for node Add order_date
+Addorder_date_node1770650980802 = Normalizestatus_node1770650705719.gs_derived(colName="order_date", expr="to_date(order_timestamp)")
+
+# Script generated for node Add hour_of_day
+Addhour_of_day_node1770651063199 = Addorder_date_node1770650980802.gs_derived(colName="hour_of_day", expr="hour(order_timestamp)")
+
+# Script generated for node Add total_amount
+Addtotal_amount_node1770651117503 = Addhour_of_day_node1770651063199.gs_derived(colName="total_amount", expr="quantity * price")
+
+# Script generated for node Write quarantine
+Writequarantine_node1770653399413 = glueContext.write_dynamic_frame.from_catalog(frame=Addrejection_reason_node1770651864057, database="ecommerce_lakehouse", table_name="quarantine_orders", transformation_ctx="Writequarantine_node1770653399413")
+
+# Script generated for node Write curated
+Writecurated_node1770653489738 = glueContext.write_dynamic_frame.from_catalog(frame=Addtotal_amount_node1770651117503, database="ecommerce_lakehouse", table_name="curated_orders", transformation_ctx="Writecurated_node1770653489738")
+
+job.commit()
+```
 
 ## Comparison with Manual PySpark Code
 - Visual: simpler for basic filters/derive, auto-partitioning, less custom logic
@@ -65,5 +108,6 @@ Created visual job: visual-orders-raw-to-curated
 
 
 ## Visual canvas graph
+<img width="1260" height="278" alt="image" src="https://github.com/user-attachments/assets/3948e276-8c1e-4ff2-818b-da2550b50299" />
 
 
