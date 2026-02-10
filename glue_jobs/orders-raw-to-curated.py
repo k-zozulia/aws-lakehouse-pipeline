@@ -1,4 +1,5 @@
 import sys
+import boto3
 from awsglue.transforms import *
 from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
@@ -129,3 +130,12 @@ end_time = datetime.now()
 print(f"Job ended at: {end_time.isoformat()}")
 
 job.commit()
+
+glue_client = boto3.client('glue')
+crawler_name = "curated-partitions-crawler"
+
+try:
+    glue_client.start_crawler(Name=crawler_name)
+    print(f"Crawler {crawler_name} started successfully!")
+except Exception as e:
+    print(f"Error starting crawler: {e}")
