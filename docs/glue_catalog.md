@@ -63,9 +63,6 @@ Database: `ecommerce_lakehouse`
   {"Name": "price", "Type": "double", "Comment": "Unit price"},
   {"Name": "status", "Type": "string", "Comment": "Normalized status"},
   {"Name": "order_timestamp", "Type": "timestamp", "Comment": "Order placement timestamp"},
-  {"Name": "order_date", "Type": "date", "Comment": "Date extracted from timestamp (partition key)"},
-  {"Name": "hour_of_day", "Type": "int", "Comment": "Hour of the day (0-23)"},
-  {"Name": "total_amount", "Type": "double", "Comment": "quantity * price"},
   {"Name": "rejection_reason", "Type": "string", "Comment": "Reason for rejection"}
 ]
 ```
