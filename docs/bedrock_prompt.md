@@ -12,7 +12,7 @@
 
 ## Prompt template (main part)
 
-```json
+```python
 You are a senior business analyst...
 Generate a concise daily Markdown business + data quality report.
 Note: This report uses data from {report_data_date} (same day of month, but one month ago for demo purposes).
@@ -37,8 +37,10 @@ Output ONLY the Markdown report. Max 1000 tokens.
 
 
 ## Example generated report (2026-01-13)
+<img width="528" height="629" alt="image" src="https://github.com/user-attachments/assets/9df82f03-dcab-4131-92de-6a715edcbd97" />
 
 ## Report file in S3
+<img width="908" height="376" alt="image" src="https://github.com/user-attachments/assets/27351bd2-aee0-4dfc-aede-325772f45bad" />
 
 
 ## Notes
